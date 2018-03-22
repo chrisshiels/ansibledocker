@@ -33,15 +33,10 @@
     (virtualenv) host$ pip install -r requirements.txt 
 
 
-    (virtualenv) host$ # Build Docker image locally.
+    (virtualenv) host$ # Build Docker image locally to test build.
     (virtualenv) host$ cd docker
     (virtualenv) host$ docker build -t helloworld:0.0.1 .
-
-
-    (virtualenv) host$ # Test Docker image locally with conu.
-    (virtualenv) host$ cd test
-    (virtualenv) host$ pytest -v
-    (virtualenv) host$ cd ../..
+    (virtualenv) host$ cd ..
 
 
     (virtualenv) host$ # Run Vagrant with Ansible provider.
@@ -54,10 +49,17 @@
 
 
     (virtualenv) host$ # Check output from virtual machine.
-    (virtualenv) host$ curl \
-        http://$(vagrant ssh-config | awk '/HostName/ {print $2}')/
+    (virtualenv) host$ curl http://192.168.33.10/
 
 
 ## What's missing
 
-- Ideally would include molecule testing of individual Ansible roles.
+- Molecule testing of individual Ansible roles.
+
+- Got conu working on Fedora but couldn't get it working on macOS.
+
+```
+    (virtualenv) host$ # Test Docker image locally with conu.
+    (virtualenv) host$ cd docker/test
+    (virtualenv) host$ pytest -v
+```
